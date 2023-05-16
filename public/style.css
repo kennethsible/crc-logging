@@ -56,6 +56,7 @@ body {
 	color: rgb(241, 237, 237);
 	font-size: 16px;
 	position: relative;
+	cursor: pointer;
 }
 
 .wrapper .sidebar ul li a .icon {
@@ -90,7 +91,7 @@ body {
 
 .wrapper .section .header {
 	background: rgb(67, 133, 190);
-	height: 50px;
+	height: 25px;
 	display: flex;
 	align-items: center;
 	padding: 0 30px;
@@ -126,16 +127,4 @@ th {
 td {
 	border: 1px solid #ddd;
 	padding: 8px;
-}
-
-.container {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr;
-	height: 100vh;
-}
-
-.section_split {
-	border: 1px solid black;
-	padding: 20px;
 }
