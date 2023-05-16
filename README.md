@@ -5,13 +5,18 @@
 ```
 git clone https://github.com/kennethsible/crclogging.git
 ```
-2. Install [Node.js](https://nodejs.org/en)
+2. Install [Node.js](https://nodejs.org/en) (should be installed already)
 ```
 sudo apt install nodejs npm
 ```
 3. Install [Express](https://expressjs.com)
 ```
+mv ~/.npm ~/.npm-backup
+mkdir /tmp/shampton
+ln -s /tmp/shampton ~/.npm
 npm install express
+rm ~/.npm
+mv /tmp/shampton ~/.npm
 ```
 ## Usage
 1. Launch Tmux (on remote)
@@ -22,13 +27,13 @@ tmux
 ```
 node server.js
 ```
-3. Export to `public/markdown/experiment_name.md` (on remote)
+3. Export Log to `public/markdown/*.md` (on remote)
 ```
-| Epoch | Training PPL | Validation PPL |
+|     |     |     |
 |:---:|:---:|:---:|
-| 1 | 1.1 | 1.2 |
-| 2 | 2.1 | 2.2 |
-| 3 | 3.3 | 3.4 |
+|     |     |     |
+|     |     |     |
+|     |     |     |
 ```
 4. Forward Port 8080 (on local)
 ```
