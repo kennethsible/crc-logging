@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRC Logging</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="section">
+            <div class="header"></div>
+            <div id="content"></div>
+            <script>
+                async function changeContent(markdown, elementId) {
+                    let file = await fetch(markdown)
+                    let text = await file.text()
+                    document.getElementById('content').innerHTML = marked.parse(text);
+                    changeClass(elementId);
+                }
+                function changeClass(elementId) {
+                    Array.from(document.getElementsByClassName("active")).forEach(element => {
+                        element.classList.remove("active");
+                    });
+                    document.getElementById(elementId).classList.add("active");
+                }
+            </script>
+	    </div>
+        <div class="sidebar">
+            <div class="profile">
+                <img src="images/icon.png" alt="profile_picture">
+                <h3>CRC Logging</h3>
+                <p>University of Notre Dame</p>
+            </div>
+            <ul id="content_list"></ul>
+            <script>
+                const fileList = document.getElementById('content_list');
+                fetch('http://localhost:8080/api/getFiles')
+                    .then(response => response.json())
+                    .then(data => {
+                        var firstFile = true;
+                        data.files.forEach(file => {
+                            const listItem = document.createElement('li');
+                            const link = document.createElement('a');
+                            const fileName = file.replace(/\.md$/, '');
+                            link.id = fileName;
+                            link.onclick = function() {
+                                changeContent('markdown/' + file, fileName);
+                            };
+                            const linkText = document.createElement('span');
+                            linkText.textContent = fileName;
+                            linkText.classList.add('item');
+                            link.appendChild(linkText);
+                            listItem.appendChild(link);
+                            fileList.appendChild(listItem);
+                            if (firstFile) {
+                                changeContent('markdown/' + file, fileName);
+                                firstFile = false
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.error(`[${new Date().toLocaleTimeString()}] `, err);
+                    });
+            </script>
+        </div>
+    </div>
+</body>
+</html>
