@@ -14,7 +14,7 @@
     <div class="wrapper">
         <div class="sidebar">
             <div class="profile">
-                <img src="images/icon.png" alt="log_icon">
+                <img src="images/icon.png" alt="profile_picture">
                 <h3>CRC Logging</h3>
                 <p>University of Notre Dame</p>
             </div>
@@ -54,8 +54,11 @@
             <div class="header">
                 <div class="collapse">
                     <a href="#">
-                        <i id="collapse-icon" class="fa-solid fa-chevron-left fa-xs"></i>
+                        <i id="collapse-icon" class="fa-solid fa-chevron-left"></i>
                     </a>
+                </div>
+                <div class="center">
+                    <h4 id="title"></h4>
                 </div>
                 <script>
                     var collapse = document.querySelector('.collapse');
@@ -75,6 +78,7 @@
                     async function changeContent(markdownFile, elementId) {
                         let file = await fetch(markdownFile)
                         let text = await file.text()
+                        document.getElementById('title').innerHTML = elementId;
                         document.getElementById('content').innerHTML = marked.parse(text);
                         changeClass(elementId);
                     }
