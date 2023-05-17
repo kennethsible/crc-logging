@@ -7,13 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRC Logging</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <script src="https://kit.fontawesome.com/59ae9371d9.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
         <div class="sidebar">
             <div class="profile">
-                <img src="images/icon.png" alt="profile_picture">
+                <img src="images/icon.png" alt="log_icon">
                 <h3>CRC Logging</h3>
                 <p>University of Notre Dame</p>
             </div>
@@ -50,11 +51,29 @@
             </script>
         </div>
         <div class="section">
-            <div class="header"></div>
+            <div class="header">
+                <div class="collapse">
+                    <a href="#">
+                        <i id="collapse-icon" class="fa-solid fa-chevron-left fa-xs"></i>
+                    </a>
+                </div>
+                <script>
+                    var collapse = document.querySelector('.collapse');
+                    collapse.addEventListener('click', function() {
+                        var collapse_icon = document.getElementById('collapse-icon');
+                        if (document.querySelector('body').classList.contains('active')) {
+                            collapse_icon.classList.replace('fa-chevron-right', 'fa-chevron-left')
+                        } else {
+                            collapse_icon.classList.replace('fa-chevron-left', 'fa-chevron-right')
+                        }
+                        document.querySelector('body').classList.toggle('active');
+                    })
+                </script>
+            </div>
             <div id="content"></div>
             <script>
-                    async function changeContent(markdown, elementId) {
-                        let file = await fetch(markdown)
+                    async function changeContent(markdownFile, elementId) {
+                        let file = await fetch(markdownFile)
                         let text = await file.text()
                         document.getElementById('content').innerHTML = marked.parse(text);
                         changeClass(elementId);
