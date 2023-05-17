@@ -3,7 +3,10 @@ import { readdir } from 'fs';
 
 const app = express();
 const directoryPath = 'public/markdown';
-const serverPort = 8080;
+var serverPort = 8080;
+if (process.argv.length >= 4 && process.argv[2] == '--port') {
+  var serverPort = process.argv[3];
+}
 
 app.get('/api/getFiles', (req, res) => {
   readdir(directoryPath, (err, files) => {

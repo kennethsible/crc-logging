@@ -1,3 +1,21 @@
+<style>
+.vertical-line {
+    border-left: 2px solid gray;
+}
+.image-container {
+    display: flex;
+    justify-content: space-between;
+}
+</style>
+
+<div class="image-container">
+    <img src="images/loss_plot.png" style="width: calc((100% / 3) - 2px)">
+    <div class="vertical-line"></div>
+    <img src="images/bleu_plot.png" style="width: calc((100% / 3) - 2px)">
+    <div class="vertical-line"></div>
+    <img src="images/chrf_plot.png" style="width: calc((100% / 3) - 2px)">
+</div>
+
 |Epoch|Training Loss|Validation Loss|Training Time|BLEU|chrF2|Decoding Time|
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
 |001|0.0019861396867782|0.0025029384996742|0:34:32.041310|3.5498970311163944|27.5564032351241757|0:37:02.285597|

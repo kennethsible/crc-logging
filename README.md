@@ -20,22 +20,12 @@ mv /tmp/shampton ~/.npm
 ```
 ## Usage
 1. Launch Tmux (on remote)
+2. Start Server (on remote)
 ```
-tmux
+node server.js --port 8080
 ```
-2. Launch Server (on remote)
-```
-node server.js
-```
-3. Export Log to `public/markdown/*.md` (on remote)
-```
-|     |     |     |
-|:---:|:---:|:---:|
-|     |     |     |
-|     |     |     |
-|     |     |     |
-```
-4. Forward Port 8080 (on local)
+3. Log to `public/markdown/*.md` (on remote)
+4. Forward Port (on local)
 ```
 ssh -L 8080:localhost:8080 ssh_remote_hostname
 ```
