@@ -1,6 +1,6 @@
 <style>
 .vertical-line {
-    border-left: 2px solid gray;
+    border-left: 2px solid #ddd;
 }
 .image-container {
     display: flex;

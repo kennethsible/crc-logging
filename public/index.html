@@ -18,10 +18,38 @@
                 <h3>CRC Logging</h3>
                 <p>University of Notre Dame</p>
             </div>
-            <ul id="content_list"></ul>
+            <div class="search-box">
+                <div class="row">
+                    <input type="text" id="input-box" placeholder="Search" autocomplete="off">
+                    <button onclick="filterContent()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <div class="result-box"></div>
+                <script src="search.js"></script>
+                <script>
+                    function filterContent() {
+                        const inputBox = document.getElementById('input-box');
+                        if (availableKeywords.includes(inputBox.value)) {
+                            changeContent('markdown/' + inputBox.value + '.md', inputBox.value);
+                        } else {
+                            document.getElementById('title').innerHTML = inputBox.value;
+                            document.getElementById('content').innerHTML = '';
+                            Array.from(document.getElementsByClassName("active")).forEach(element => {
+                                element.classList.remove("active");
+                            });
+                        }
+                        resultBox.innerHTML = '';
+                    }
+                    function selectInput(list) {
+                        inputBox.value = list.innerHTML;
+                        resultBox.innerHTML = '';
+                        filterContent();
+                    }
+                </script>
+            </div>
+            <ul id="content-list"></ul>
             <script>
-                const fileList = document.getElementById('content_list');
-                fetch('http://localhost:8080/api/getFiles')
+                const fileList = document.getElementById('content-list');
+                fetch('/api/getFiles')
                     .then(response => response.json())
                     .then(data => {
                         var firstFile = true;
@@ -54,7 +82,7 @@
             <div class="header">
                 <div class="collapse">
                     <a href="#">
-                        <i id="collapse-icon" class="fa-solid fa-chevron-left"></i>
+                        <i id="collapse-icon" class="fa-solid fa-chevron-left fa-lg"></i>
                     </a>
                 </div>
                 <div class="center">
